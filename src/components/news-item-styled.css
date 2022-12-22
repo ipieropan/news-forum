@@ -1,0 +1,15 @@
+.news-app{
+    display: flex;
+    justify-content: center;
+}
+
+.news-item{
+    width: 31.25rem;
+    padding: 1.25rem;
+    border: 0.0625rem solid;
+    margin: 1.25rem;
+}
+
+.news-img{
+    width: 25rem;
+}
