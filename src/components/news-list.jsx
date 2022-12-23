@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NewsItem from './news-item';
+import { categories } from './category-data';
+import { country } from './country-data';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -26,7 +28,9 @@ const NewList = () => {
         <div>
             <Navbar bg="light" expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">News</Navbar.Brand>
+                    <Navbar.Brand href="Brasil" onClick={() => showNews()}>
+                        News
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -35,66 +39,34 @@ const NewList = () => {
                                 title="Categories"
                                 menuVariant="dark"
                             >
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?language=en&category=business&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    Business
-                                </NavDropdown.Item>
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?language=en&category=health&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    Health
-                                </NavDropdown.Item>
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?language=en&category=sports&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    Sports
-                                </NavDropdown.Item>
+                                {categories.map((category) => {
+                                    return (
+                                        <NavDropdown.Item
+                                            onClick={() =>
+                                                setShowNews(category.url)
+                                            }
+                                        >
+                                            {category.title}
+                                        </NavDropdown.Item>
+                                    );
+                                })}
                             </NavDropdown>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
                                 title="Change to other country"
                                 menuVariant="dark"
                             >
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?country=se&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    Sweden
-                                </NavDropdown.Item>
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?country=us&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    USA
-                                </NavDropdown.Item>
-                                <NavDropdown.Item
-                                    onClick={() =>
-                                        setShowNews(
-                                            'https://newsapi.org/v2/top-headlines?country=gb&apiKey=3e620089b1914b6f96a33ba1ad1f0535'
-                                        )
-                                    }
-                                >
-                                    UK
-                                </NavDropdown.Item>
+                                {country.map((countries) => {
+                                    return (
+                                        <NavDropdown.Item
+                                            onClick={() =>
+                                                setShowNews(countries.url)
+                                            }
+                                        >
+                                            {countries.title}
+                                        </NavDropdown.Item>
+                                    );
+                                })}
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
